@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='catalog.css') }}">
+  <title>Log up</title>
+</head>
+<body>
+  <div id='container'>
+    <header>
+      <h1> Catalog App</h1>
+    </header>
+    <div id='main'>
+      <section id='#cat_and_items'>
+        <form action='{{url_for('log_up')}}' method='post'>
+          <dl>
+            <dt>Username:</dt>
+            <dd><input type ='text' size='30' name='user_name' placeholder = 'Enter your username' required></dd>
+            <dt>password:</dt>
+            <dd><input type ='password' size='30' name='password' placeholder = 'Enter your password' required></dd>
+          </dl>
+          <input type='submit' value='Log up'>
+      </form>
+      {%if error_msg%}
+      <strong>Error: {{error_msg}} </strong>
+      {%endif%}
+    </section>
+    </div>
+    <footer>By Ebtihal</footer>
+  </div>
+    </body>
+    </html>

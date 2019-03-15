@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Item Catalog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='catalog.css') }}">
+
+</head>
+
+<body>
+
+  <div id='container'>
+    <header>
+      <a href='{{url_for('catalog')}}'><h1> Catalog App</h1></a>
+      {%if error_msg%}
+      <strong>{{error_msg}}</strong>
+      {%endif%}
+      <a href='{{url_for('logout')}}'><button type='button'>log out</button></a>
+    </br>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    {% for message in messages %}
+    <strong style="color:black;">{{ message }}</strong>
+  {% endfor %}
+  {% endif %} {% endwith %}
+    </header>
+    <div id='main'>
+      <div id='cat_and_items'>
+<section id='items'>
+  <h2>{{name}}'s Items ({{count}})</h2>
+  {%for item in items%}
+  <a href='{{url_for('getItem',category_id=item.cat_id,title=item.title)}}'><li>{{item.title}}</li></a>
+  </br>
+  {%endfor%}
+</section>
+</div>
+</div>
+<footer>By Ebtihal</footer>
+</div>
+</body>
+</html>

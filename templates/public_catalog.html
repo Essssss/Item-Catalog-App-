@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Item Catalog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='catalog.css') }}">
+
+</head>
+
+<body>
+
+  <div id='container'>
+    <header>
+      <a href='{{url_for('catalog')}}'><h1> Catalog App</h1></a>
+
+      <button type='button'><a href='{{url_for('log_up')}}'>log up</a></button>
+      <button type='button'><a href='{{url_for('login')}}'>login</a></button>
+    </br>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    {% for message in messages %}
+    <strong style="color:black;">{{ message }}</strong>
+  {% endfor %}
+  {% endif %} {% endwith %}
+    </header>
+    <div id='main'>
+      <div id='cat_and_items'>
+      <section id='categories'>
+  <h2> Categories </h2>
+  {% for c in categories%}
+   <a href='{{url_for('getItemsOfCategory',category_id=c.id)}}'><li>{{ c.name}}</li></a>
+  {%endfor%}
+</section>
+<section id='items'>
+  <h2>Items</h2>
+  {%for item in items%}
+  <a href='{{url_for('getItem', category_id =item.cat_id, title=item.title )}}'>
+    <li><b>{{item.title}} </b>{%for c in category_list%}{%if item.cat_id == c['id']%} ( {{c['name']}} ) {%endif%}
+  {%endfor%} </li> </a>
+  {%endfor%}
+</section>
+{% block content %}{% endblock %}
+</div>
+</div>
+<footer>By Ebtihal</footer>
+</div>
+</body>
+</html>

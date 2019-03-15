@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Item Catalog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href='http://fonts.googleapis.com/css?family=Roboto:400,300,700' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css">
+  <link rel=stylesheet type=text/css href="{{ url_for('static', filename='catalog.css') }}">
+
+</head>
+
+<body>
+
+  <div id='container'>
+    <header>
+      <a href='{{url_for('catalog')}}'><h1> Catalog App</h1></a>
+      {%if error_msg%}
+      <strong>{{error_msg}}</strong>
+      {%endif%}
+      <a href='{{url_for('logout')}}'><button type='button'>log out</button></a>
+    </br>
+    {% with messages = get_flashed_messages() %} {% if messages %}
+    {% for message in messages %}
+    <strong style="color:black;">{{ message }}</strong>
+  {% endfor %}
+  {% endif %} {% endwith %}
+    </header>
+    <div id='main'>
+      <div id='cat_and_items'>
+        <div>
+            <h1>Edit <b>({{item.title}})</b> Item</h1>
+            <form action='{{url_for('editItem',title=item.title)}}' method='post'>
+              <dl>
+                <dt>Title:</dt>
+                <dd><input type ='text' size='30' name='title' placeholder = '{{item.title }}'></dd>
+                <dt>Description:</dt>
+                <dd><textarea name ='description' rows='5' cols='40' placeholder = '{{item.description }}'></textarea></dd>
+                <dt>Category:</dt>
+                <dd>
+                  {%for c in categories%}
+                  {%if c.id == item.cat_id%}
+                  <input type ='radio' name='id' value='{{c.id}}'checked >{{c.name}}
+                  {%else%}
+                  <input type ='radio' name='id' value='{{c.id}}' >{{c.name}}
+                  {%endif%}
+                  {%endfor%}
+                </dd>
+              </dl>
+              <input type='submit' value='Edit'>
+              <a href='{{url_for('getItem',category_id=item.cat_id,title=item.title)}}'>Cancel</a>
+            </form>
+          </div>
+        </div>
+      </div>
+      <footer>By Ebtihal</footer>
+    </div>
+  </body>
+  </html>
