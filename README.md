@@ -9,4 +9,4 @@ This is a web Application that provides a list of items within a variety of cate
 * Run the Application.py file `python application.py`
 * Go to localhost:5000/catalog to try the Application
 * First log up/ sing up, then you can create your own items and you can modify them or delete them.
-* You can add more categories go the line `198` and uncomment it and add more categories.
+* You can add more categories go the line `216` in the application.py file and uncomment it and add more categories.
